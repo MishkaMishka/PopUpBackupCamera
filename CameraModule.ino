@@ -17,4 +17,6 @@ void loop() {
         //Hold the servo in the reverse position for 10 seconds
         sleep(10000);
     }
+    //Return the servo to the forward position
+    servo.write(0);
 }
