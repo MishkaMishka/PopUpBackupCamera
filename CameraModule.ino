@@ -8,6 +8,7 @@ const REVERSE_SIGNAL = D6
 void setup() {
   servo.attach(SERVO_PIN);
   pinMode(REVERSE_SIGNAL, INPUT_PULLUP);
+
 }
 
 void loop() {
