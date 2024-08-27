@@ -2,22 +2,39 @@
 
 Servo servo;
 
-const SERVO_PIN = D7
-const REVERSE_SIGNAL = D6
+const int SERVO_PIN = D7;
+const int REVERSE_SIGNAL = D6;
+
+unsigned long reverseSignalEndTime = 0;
+bool reverseActive = false;
+bool lidOpen = false;
 
 void setup() {
   servo.attach(SERVO_PIN);
   pinMode(REVERSE_SIGNAL, INPUT_PULLUP);
-
+  servo.write(0);  // Ensure the lid is initially closed
 }
 
 void loop() {
-    
-    if(digitalRead(REVERSE_SIGNAL) == HIGH) {
-        servo.write(180);
-        //Hold the servo in the reverse position for 10 seconds
-        sleep(10000);
+  if (digitalRead(REVERSE_SIGNAL) == HIGH) {
+    // Reverse signal is active
+    if (!reverseActive) {
+      servo.write(180);  // Open the lid
+      lidOpen = true;
+      reverseActive = true;
     }
-    //Return the servo to the forward position
-    servo.write(0);
+    reverseSignalEndTime = millis();  // Reset the end time while the signal is active
+  } else {
+    // Reverse signal is not active
+    if (reverseActive) {
+      reverseActive = false;
+      reverseSignalEndTime = millis();  // Mark the time when the signal went LOW
+    }
+  }
+
+  // Check if the lid should close after 15 seconds
+  if (lidOpen && (millis() - reverseSignalEndTime > 15000)) {
+    servo.write(0);  // Close the lid
+    lidOpen = false;
+  }
 }
