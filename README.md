@@ -10,7 +10,7 @@ Additionally, a step-down converter is used to reduce the voltage from 12V to 5V
 - Servo motor (MG90S)
 - Step-down converter
 - PC 817 transoptor
-- Custom 3D-printed housing for the camera assembly
+- Custom 3D-printed housing for the camera assembly: https://www.thingiverse.com/thing:5745347
 - Wires and connectors
 
 ## Installation
