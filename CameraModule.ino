@@ -2,8 +2,8 @@
 
 Servo servo;
 
-const int SERVO_PIN = D7;
-const int REVERSE_SIGNAL = D6;
+const int SERVO_PIN = D8;
+const int REVERSE_SIGNAL = D7;
 
 unsigned long reverseSignalEndTime = 0;
 bool reverseActive = false;
